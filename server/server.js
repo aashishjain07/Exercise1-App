@@ -15,14 +15,14 @@ const port = process.env.PORT;
 app.use(bodyParser.json());
 
 app.post('/users', (req, res) => {
-  var body = _.pick(req.body, ['account', 'password']);
+  var body = _.pick(req.body, ['account', 'password', 'address', , 'category', 'label', 'vout', 'confirmations']);
   var user = new User(body);
 
   user.save().then((user) => {
-  //   return user.generateAuthToken();
-  // }).then((token) => {
-  //   res.header('x-auth', token).send(user);
-  res.send(user);
+    return user.generateAuthToken();
+  }).then((token) => {
+    res.header('x-auth', token).send(user);
+  // res.send(user);
   }).catch((e) => {
     res.status(400).send(e);
   })

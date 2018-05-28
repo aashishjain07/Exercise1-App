@@ -43,9 +43,9 @@ var UserSchema = new mongoose.Schema({
   confirmations: {
     type: Boolean
   },
-  "bip-125 replaceable": {
-    type: Boolean
-  },
+  // "bip-125 replaceable": {
+  //   type: Boolean
+  // },
 //  {timestamps: true});
   tokens: [{
     access: {
@@ -63,7 +63,7 @@ UserSchema.methods.toJSON = function () {
   var user = this;
   var userObject = user.toObject();
 
-  return _.pick(userObject, ['_id', 'account']);
+  return _.pick(userObject, ['_id', 'account', 'address', 'category', 'label', 'vout', 'confirmations']);
 };
 
 UserSchema.methods.generateAuthToken = function () {
